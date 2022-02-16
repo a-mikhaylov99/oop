@@ -5,10 +5,7 @@ function copyFile(fileNumberOne: string, fileNumberTwo: string) {
     return fs.writeFileSync(fileNumberTwo, fileOne)
 }
 
-//
-let fileOne: string = process.argv[3]
-let fileTwo: string = process.argv[4]
+let fileOne: string = process.argv[2]
+let fileTwo: string = process.argv[3]
 
-
-// copyFile('fileNumberOne.txt', 'fileNumberTwo.txt')
 copyFile(fileOne, fileTwo)
