@@ -1,5 +1,5 @@
 const BINARY_NUMBER_SYSTEM = 2
-const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 2 arguments'
+const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 3 arguments'
 const MESSAGE_NON_BINARY_NUMBER = 'The number is not in binary notation'
 
 function convertToBase(binaryNumber: string, base: number): null | number {
@@ -16,7 +16,7 @@ function checkBinaryNumbers(number: string, base: number): number {
         console.log(MESSAGE_NON_BINARY_NUMBER)
         break
     }
-    return binary // разбить проверку и перевод из 2 сс в 10 сс
+    return binary // разбить проверку и перевод из 3 сс в 10 сс
 }
 
 function runBinaryToDecimalProgram(): void {

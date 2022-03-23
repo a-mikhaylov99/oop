@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 
 const SOME_ERROR = 'No such file or directory, open'
-const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 2 arguments'
+const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 3 arguments'
 
 //inputFileName...
 function readFile(inputFileName: string): string {
