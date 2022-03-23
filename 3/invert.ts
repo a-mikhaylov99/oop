@@ -1,4 +1,10 @@
-const matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+import * as fs from 'fs'
+
+const matrix = [[1, 2, 3], [4, 5, 6], [7, 111, 10]]
+
+function readFile(file: string): string {
+    return fs.readFileSync(file, 'utf-8')
+}
 
 function calculateDeterminant(matrix: number[][]) {
     let matrixDeterminant = 0
