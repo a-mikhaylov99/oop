@@ -2,21 +2,21 @@ const BINARY_NUMBER_SYSTEM = 2
 const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 2 arguments'
 const MESSAGE_NON_BINARY_NUMBER = 'The number is not in binary notation'
 
-function binaryToDecimal(binaryNumber: string, base: number): null | number {
+function convertToBase(binaryNumber: string, base: number): null | number {
     const parsed: number = parseInt(binaryNumber, base)
     return isNaN(parsed) ? null : parsed
 }
 
-function checkBinaryNumbers(number: string, base: number): number | string {
-    const binary: number = binaryToDecimal(number, base)
+function checkBinaryNumbers(number: string, base: number): number {
+    const binary: number = convertToBase(number, base)
     for (let i = 0; i < number.length; i++) {
         if (number[i] === '1' || number[i] === '0') {
             continue
         }
-        return MESSAGE_NON_BINARY_NUMBER
+        console.log(MESSAGE_NON_BINARY_NUMBER)
         break
     }
-    return binary
+    return binary // разбить проверку и перевод из 2 сс в 10 сс
 }
 
 function runBinaryToDecimalProgram(): void {
