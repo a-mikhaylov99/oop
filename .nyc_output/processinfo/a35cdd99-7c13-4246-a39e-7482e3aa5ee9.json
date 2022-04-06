@@ -1,0 +1,1 @@
+{"parent":null,"pid":10008,"argv":["C:\\Program Files\\nodejs\\node.exe","D:\\oop\\node_modules\\mocha\\bin\\_mocha","'test/**/*.test.ts'"],"execArgv":[],"cwd":"D:\\oop","time":1649280032085,"ppid":1904,"coverageFilename":"D:\\oop\\.nyc_output\\a35cdd99-7c13-4246-a39e-7482e3aa5ee9.json","externalId":"","uuid":"a35cdd99-7c13-4246-a39e-7482e3aa5ee9","files":[]}
