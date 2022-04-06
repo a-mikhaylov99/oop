@@ -1,12 +1,19 @@
 {
   "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.21",
+    "chai": "^4.3.6",
+    "jest": "^27.5.1",
+    "jest-runner-mocha": "^0.6.0",
+    "mocha": "^9.2.2",
     "ts-node": "^8.10.2",
     "typescript": "^4.0.8"
   },
   "scripts": {
     "run": "npx ts-node",
-    "ts-build": "tsc --build"
+    "ts-build": "tsc --build",
+    "test": "mocha"
   },
   "dependencies": {
     "-": "^0.0.1",
