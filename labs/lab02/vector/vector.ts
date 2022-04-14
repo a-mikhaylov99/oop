@@ -1,73 +1,56 @@
 import {stdin as input, stdout as output} from 'process'
 import * as readline from 'readline'
 
-const ERROR_MESSAGE = 'Numbers must not contain letters, commas, more than two dots or more than two cons in a row'
+const ERROR_MESSAGE = 'Numbers must not contain letters, commas, more than two dots, zero cannot be the maximum number.'
 
 main()
 
 function main(): void {
     const readLine: readline.Interface = readline.createInterface({input, output})
-    readLine.question('Enter several numbers in a row: ', (array: string) => {
-        if (containsIncorrectCharacters(array)) {
-            errorOutput(new Error(ERROR_MESSAGE))
+    readLine.question('Enter several numbers in a row: ', (inputString: string) => {
+        if (containsIncorrectCharacters(inputString) || handleZero(inputString)) {
+            console.log(ERROR_MESSAGE)
         } else {
-            transformStringToArray(array)
-            transformStringArrayToNumber(array)
-            processArray(array)
-            outputResult(array)
+            outputProcessedResult(inputString)
         }
         readLine.close()
     })
 }
 
-function containsIncorrectCharacters(str: string): boolean {
-    let searchResult: boolean
-    const stringArray: string[] = transformStringToArray(str)
+function containsIncorrectCharacters(inputString: string): boolean {
+    let isExistCorrectCharacter: boolean
+    const stringArray: string[] = inputString.split(' ')
     for (const string of stringArray) {
-        searchResult = !string.match(/^-?(?:\.\d+|\d+\.?\d*)$/)
+        isExistCorrectCharacter = !string.match(/^[+-]?([0-9]*\.)?[0-9]+$/)
     }
-    return searchResult
+    return isExistCorrectCharacter
 }
 
-function transformStringToArray(str: string): string[] {
-    return str.split(' ')
+function handleZero(inputString: string): boolean {
+    const numberArray: number[] = transformStringArrayToNumber(inputString)
+    return Math.max(...numberArray) === 0
 }
 
-function transformStringArrayToNumber(str: string): number[] {
-    const numberArray: number[] = []
-    const stringArray: string[] = transformStringToArray(str)
-    for (const string of stringArray) {
-        if (string) {
-            numberArray.push(parseFloat(string))
-        }
-    }
-    return numberArray
+function transformStringArrayToNumber(inputString: string): number[] {
+    const stringArray: string[] = inputString.split(' ')
+    return stringArray.map(string => parseFloat(string.trim()))
 }
 
-function processArray(str: string): number[] {
-    const numberArray: number[] = transformStringArrayToNumber(str)
-    const maxNumber: number = Math.max(...numberArray) / 2
-    const resultArray: number[] = []
-    for (const number of numberArray) {
-        resultArray.push(Number((number / maxNumber).toFixed(3)))
-    }
-    return resultArray
+function divideArrayElementsByHalfMaxElem(inputString: string): number[] { // функция должна принимать массив типа number применимо ко всем
+    const numberArray: number[] = transformStringArrayToNumber(inputString)
+    const maxNumber: number = Math.max(...numberArray) / 2 // проверка для пустого массива
+    return numberArray.map(number => Number((number / maxNumber).toFixed(3))) // должна возвращать массив строк
 }
 
-function outputResult(str: string): void {
-    console.log(processArray(str).toString())
-}
-
-function errorOutput(error: Error): void {
-    console.log(error.message)
+function outputProcessedResult(inputString: string): void { // имя функции
+    console.log(divideArrayElementsByHalfMaxElem(inputString).join(' '))// вывести до 3 знаков после запятой тут
 }
 
 export {
     main,
     containsIncorrectCharacters,
-    transformStringToArray,
     transformStringArrayToNumber,
-    processArray,
-    outputResult,
-    errorOutput,
+    divideArrayElementsByHalfMaxElem,
+    outputProcessedResult,
+    handleZero,
 }
