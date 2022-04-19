@@ -8,10 +8,13 @@ main()
 function main(): void {
     const readLine: readline.Interface = readline.createInterface({input, output})
     readLine.question('Enter several numbers in a row: ', (inputString: string) => {
-        if (containsIncorrectCharacters(inputString) || handleZero(inputString)) {
-            console.log(ERROR_MESSAGE)
+        const stringArray: string[] = stringToArray(inputString)
+        const numberArray: number[] = transformStringArrayToNumber(stringArray)
+        if (containsIncorrectCharacters(inputString) || handleZero(numberArray)) {
+            handleError(new Error(ERROR_MESSAGE))
         } else {
-            outputProcessedResult(inputString)
+            const divArray: number[] = divideArrayElementsByHalfMaxElem(numberArray)
+            printArray(divArray)
         }
         readLine.close()
     })
@@ -26,24 +29,44 @@ function containsIncorrectCharacters(inputString: string): boolean {
     return isExistCorrectCharacter
 }
 
-function handleZero(inputString: string): boolean {
-    const numberArray: number[] = transformStringArrayToNumber(inputString)
+function handleZero(numberArray: number[]): boolean {
     return Math.max(...numberArray) === 0
 }
 
-function transformStringArrayToNumber(inputString: string): number[] {
-    const stringArray: string[] = inputString.split(' ')
+function stringToArray(inputString: string): string[] {
+    let array: string[] = []
+    const stringArray = inputString.split(' ')
+    for (const string of stringArray) {
+        if (string) {
+            array.push(string)
+        }
+    }
+    return array
+}
+
+function transformStringArrayToNumber(stringArray: string[]): number[] {
     return stringArray.map(string => parseFloat(string.trim()))
 }
 
-function divideArrayElementsByHalfMaxElem(inputString: string): number[] { // функция должна принимать массив типа number применимо ко всем
-    const numberArray: number[] = transformStringArrayToNumber(inputString)
-    const maxNumber: number = Math.max(...numberArray) / 2 // проверка для пустого массива
-    return numberArray.map(number => Number((number / maxNumber).toFixed(3))) // должна возвращать массив строк
+function divideArrayElementsByHalfMaxElem(numberArray: number[]): number[] {
+    let numbers: number[] = []
+    for (const number of numberArray) {
+        if (isNaN(number)) {
+            const maxNumber: number = Math.max(...numberArray) / 2
+            numbers = numberArray.map(number => (number / maxNumber))
+        }
+    }
+    return numbers
 }
 
-function outputProcessedResult(inputString: string): void { // имя функции
-    console.log(divideArrayElementsByHalfMaxElem(inputString).join(' '))// вывести до 3 знаков после запятой тут
+function handleError(error: Error): void {
+    console.log(error.message)
+}
+
+function printArray(numbers: number[]): void {
+    for (const number of numbers) {
+        console.log(number.toFixed(3))
+    }
 }
 
 export {
@@ -51,6 +74,7 @@ export {
     containsIncorrectCharacters,
     transformStringArrayToNumber,
     divideArrayElementsByHalfMaxElem,
-    outputProcessedResult,
+    printArray,
     handleZero,
+    stringToArray,
 }
