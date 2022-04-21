@@ -51,7 +51,7 @@ function transformStringArrayToNumber(stringArray: string[]): number[] {
 function divideArrayElementsByHalfMaxElem(numberArray: number[]): number[] {
     let numbers: number[] = []
     for (const number of numberArray) {
-        if (isNaN(number)) {
+        if (!isNaN(number)) {
             const maxNumber: number = Math.max(...numberArray) / 2
             numbers = numberArray.map(number => (number / maxNumber))
         }
@@ -68,6 +68,7 @@ function printArray(numbers: number[]): void {
         console.log(number.toFixed(3))
     }
 }
+
 
 export {
     main,

@@ -77,6 +77,10 @@ describe('Vector test: ', () => {
             expect(divideArrayElementsByHalfMaxElem([4, 2, 4])).eql([2, 1, 2])
         })
 
+        it('Correct division of an array of integers by half of the maximum element', function () {
+            expect(divideArrayElementsByHalfMaxElem([])).eql([])
+        })
+
         it('Correct division of an array of long integers by half of the maximum element', function () {
             expect(divideArrayElementsByHalfMaxElem([Number.MAX_VALUE, Number.MAX_VALUE - 100000])).eql([2.000, 2.000])
         })
