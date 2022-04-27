@@ -7,17 +7,21 @@ main()
 
 function main(): void {
     const readLine: readline.Interface = readline.createInterface({input, output})
-    readLine.question('Enter several numbers in a row: ', (inputString: string) => {
-        const stringArray: string[] = stringToArray(inputString)
+    readLine.question('Enter several numbers in a row: ', vector())
+    readLine.close()
+}
+
+function vector(): (inputString: string) => void {
+    return (inputString: string) => {
+        const stringArray: string[] = transformStringToArray(inputString)//TODO: лучше все методы по парсингу и модифицированию исходной строки и исходного массива вынести в отдельный метод.
         const numberArray: number[] = transformStringArrayToNumber(stringArray)
-        if (containsIncorrectCharacters(inputString) || handleZero(numberArray)) {
-            handleError(new Error(ERROR_MESSAGE))
-        } else {
-            const divArray: number[] = divideArrayElementsByHalfMaxElem(numberArray)
-            printArray(divArray)
+        if (containsIncorrectCharacters(inputString) || isZeroMaxElement(numberArray)) {//TODO: проверка строки должна быть до ее обраьотки
+            console.log(ERROR_MESSAGE)
+            return
         }
-        readLine.close()
-    })
+        const dividedArray: number[] = divideArrayElementsByHalfMaxElem(numberArray)
+        printArray(dividedArray)
+    }
 }
 
 function containsIncorrectCharacters(inputString: string): boolean {
@@ -29,38 +33,26 @@ function containsIncorrectCharacters(inputString: string): boolean {
     return isExistCorrectCharacter
 }
 
-function handleZero(numberArray: number[]): boolean {
+function isZeroMaxElement(numberArray: number[]): boolean {
     return Math.max(...numberArray) === 0
 }
 
-function stringToArray(inputString: string): string[] {
-    let array: string[] = []
-    const stringArray = inputString.split(' ')
-    for (const string of stringArray) {
-        if (string) {
-            array.push(string)
-        }
-    }
-    return array
+function transformStringToArray(inputString: string): string[] {
+    const stringArray: string[] = inputString.split(' ')
+    return stringArray.filter(string => string)
 }
 
 function transformStringArrayToNumber(stringArray: string[]): number[] {
-    return stringArray.map(string => parseFloat(string.trim()))
+    return stringArray.map(string => parseFloat(string))
 }
 
 function divideArrayElementsByHalfMaxElem(numberArray: number[]): number[] {
     let numbers: number[] = []
     for (const number of numberArray) {
-        if (!isNaN(number)) {
-            const maxNumber: number = Math.max(...numberArray) / 2
-            numbers = numberArray.map(number => (number / maxNumber))
-        }
+        const maxNumber: number = Math.max(...numberArray) / 2
+        numbers = numberArray.map(number => (number / maxNumber))
     }
     return numbers
-}
-
-function handleError(error: Error): void {
-    console.log(error.message)
 }
 
 function printArray(numbers: number[]): void {
@@ -69,13 +61,12 @@ function printArray(numbers: number[]): void {
     }
 }
 
-
 export {
     main,
     containsIncorrectCharacters,
     transformStringArrayToNumber,
     divideArrayElementsByHalfMaxElem,
     printArray,
-    handleZero,
-    stringToArray,
+    isZeroMaxElement,
+    transformStringToArray,
 }

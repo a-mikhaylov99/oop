@@ -1,7 +1,7 @@
 import {describe} from 'mocha'
 import {
-    containsIncorrectCharacters, handleZero, divideArrayElementsByHalfMaxElem,
-    transformStringArrayToNumber, stringToArray,
+    containsIncorrectCharacters, isZeroMaxElement, divideArrayElementsByHalfMaxElem,
+    transformStringArrayToNumber, transformStringToArray,
 } from '../../labs/lab02/vector/vector'
 import {expect} from 'chai'
 
@@ -61,7 +61,7 @@ describe('Vector test: ', () => {
     describe('function stringToArray', function () {
 
         it('The string must be processed correctly and converted into an array', function () {
-            expect(stringToArray('4 4.4 9 0.4')).eql(['4', '4.4', '9', '0.4'])
+            expect(transformStringToArray('4 4.4 9 0.4')).eql(['4', '4.4', '9', '0.4'])
         })
     })
 
@@ -105,15 +105,15 @@ describe('Vector test: ', () => {
     describe('function handleZero', function () {
 
         it('Correct processing of an array of zeros', function () {
-            expect(handleZero([0, 0, 0])).equals(true)
+            expect(isZeroMaxElement([0, 0, 0])).equals(true)
         })
 
         it('Correct processing of an array where the maximum element is zero', function () {
-            expect(handleZero([-1, 0, -1])).equals(true)
+            expect(isZeroMaxElement([-1, 0, -1])).equals(true)
         })
 
         it('Correct processing of an array with positive, negative and zero', function () {
-            expect(handleZero([1, 0, -1])).equals(false)
+            expect(isZeroMaxElement([1, 0, -1])).equals(false)
         })
     })
 })
