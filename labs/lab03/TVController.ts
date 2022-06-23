@@ -13,8 +13,8 @@ const NO_SUCH_CHANNEL = 'There is no such channel'
 class TVController {
     private tv: TV
 
-    constructor() {
-        this.tv = new TV()
+    constructor(tv: TV) {
+        this.tv = tv
     }
 
     public turnOnTV(): string {

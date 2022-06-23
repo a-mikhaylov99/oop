@@ -3,7 +3,6 @@ import * as fs from 'fs'
 const SOME_ERROR = 'No such file or directory, open'
 const MESSAGE_CALL_APP_WITH_TWO_ARGUMENTS = 'Call app with 3 arguments'
 
-//inputFileName...
 function readFile(inputFileName: string): string {
     try {
         return fs.readFileSync(inputFileName, 'utf-8')
@@ -20,18 +19,17 @@ function writeFile(outputFileName: string, inputFileContent: string): void {
     }
 }
 
-//inputFileName...
+
 function copyFile(inputFileName: string, outputFileName: string): void {
     try {
-        const inputFileContent: string = readFile(inputFileName) //переименовать в inputFileContent
+        const inputFileContent: string = readFile(inputFileName)
         return writeFile(outputFileName, inputFileContent)
     } catch (error) {
         handleError(error)
     }
 }
 
-//Убрать условия у ошибок
-function handleError(error: any): void {
+function handleError(error: Error): void {
     console.log(error.message)
 }
 
@@ -49,5 +47,3 @@ function runCopyFileProgram(): void {
 
 runCopyFileProgram()
 
-
-// В случае ошибки програма должна сработать с ненулевым кода возврата

@@ -37,7 +37,8 @@ describe('Tv set', function () {
     })
 
     describe('Tests for tv controller', function () {
-        const tvController: TVController = new TVController()
+        const tv: TV = new TV()
+        const tvController: TVController = new TVController(tv)
 
         describe('Output information about the TV when the TV is on', function () {
 

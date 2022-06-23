@@ -13,9 +13,9 @@ function main(): void {
 
 function vector(): (inputString: string) => void {
     return (inputString: string) => {
-        const stringArray: string[] = transformStringToArray(inputString)//TODO: лучше все методы по парсингу и модифицированию исходной строки и исходного массива вынести в отдельный метод.
+        const stringArray: string[] = transformStringToArray(inputString)
         const numberArray: number[] = transformStringArrayToNumber(stringArray)
-        if (containsIncorrectCharacters(inputString) || isZeroMaxElement(numberArray)) {//TODO: проверка строки должна быть до ее обраьотки
+        if (containsIncorrectCharacters(inputString) || isZeroMaxElement(numberArray)) {
             console.log(ERROR_MESSAGE)
             return
         }
