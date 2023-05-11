@@ -1,33 +1,19 @@
-class Person {
-    protected name: string
-    protected surname: string
-    protected patronymic: string
-    protected address: string
+import {PersonInterface} from './PersonInterface'
 
-    constructor(name: string, surname: string, patronymic: string, address: string) {
-        this.name = name
-        this.surname = surname
-        this.patronymic = patronymic ?? ''
-        this.address = address
-    }
+class CPersonImpl<T extends PersonInterface> implements PersonInterface {
+    public firstName: string
+    public lastName: string
+    public middleName: string
+    public address: string
 
-    public getName() {
-        return this.name
-    }
-
-    public getSurname() {
-        return this.surname
-    }
-
-    public getPatronymic() {
-        return this.patronymic
-    }
-
-    public getAddress() {
-        return this.address
+    constructor(data: T) {
+        this.firstName = data.firstName
+        this.lastName = data.lastName
+        this.middleName = data.middleName
+        this.address = data.address
     }
 }
 
 export {
-    Person,
+    CPersonImpl,
 }
