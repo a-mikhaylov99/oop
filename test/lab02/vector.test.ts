@@ -1,9 +1,10 @@
 import {describe} from 'mocha'
-import {
-    containsIncorrectCharacters, isZeroMaxElement, divideArrayElementsByHalfMaxElem,
-    transformStringArrayToNumber, transformStringToArray,
-} from '../../labs/lab02/vector/vector'
 import {expect} from 'chai'
+import {
+    containsIncorrectCharacters,
+    divideArrayElementsByHalfMaxElem,
+    isZeroMaxElement, transformStringArrayToNumber, transformStringToArray
+} from '../../labs/lab02/vector/vector'
 
 describe('Vector test: ', () => {
 
@@ -18,7 +19,7 @@ describe('Vector test: ', () => {
         })
 
         it('Correct processing of floating-point numbers', function () {
-            expect(containsIncorrectCharacters('1.1')).equals(false)
+            expect(containsIncorrectCharacters('1.3')).equals(false)
         })
 
         it('Correct processing of long digits', function () {
@@ -30,7 +31,7 @@ describe('Vector test: ', () => {
         })
 
         it('Correct number processing: digit dot, digit dot', function () {
-            expect(containsIncorrectCharacters('1.1.1')).equals(true)
+            expect(containsIncorrectCharacters('1.3.1')).equals(true)
         })
 
         it('Correct processing of the letter number', function () {
@@ -50,7 +51,7 @@ describe('Vector test: ', () => {
         })
 
         it('Correct operation of the string: space, number', function () {
-            expect(containsIncorrectCharacters('   1.1')).equals(false)
+            expect(containsIncorrectCharacters('   1.3')).equals(false)
         })
 
         it('Correct operation of Latin and Cyrillic letters', function () {

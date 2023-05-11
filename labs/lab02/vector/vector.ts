@@ -30,6 +30,7 @@ function containsIncorrectCharacters(inputString: string): boolean {
     for (const string of stringArray) {
         isExistCorrectCharacter = !string.match(/^[+-]?([0-9]*\.)?[0-9]+$/)
     }
+    // @ts-ignore
     return isExistCorrectCharacter
 }
 
@@ -43,7 +44,12 @@ function transformStringToArray(inputString: string): string[] {
 }
 
 function transformStringArrayToNumber(stringArray: string[]): number[] {
-    return stringArray.map(string => parseFloat(string))
+    const num: number[] = []
+    for (const string of stringArray) {
+        num.push(parseFloat(string))
+    }
+    return num
+    // return stringArray.map(string => parseFloat(string))
 }
 
 function divideArrayElementsByHalfMaxElem(numberArray: number[]): number[] {
